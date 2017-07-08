@@ -14,20 +14,16 @@ export class TeamService {
         return this.http.post( 'http://pf.rails-stage.infoleven.eu:8084/teams', user);
     }
 
-    // update(user: User): Observable<Response> {
-    //     return this.http.put(this.resourceUrl, user);
-    // }
-
-    // find(login: string): Observable<User> {
-    //     return this.http.get(`${this.resourceUrl}/${login}`).map((res: Response) => res.json());
-    // }
+    find(teamId: any): Observable<TeamEvent> {
+        return this.http.get(`${this.resourceUrl}/${teamId}`).map((res: Response) => res.json());
+    }
 
     query(req?: any): any {
         const params: URLSearchParams = new URLSearchParams();
         if (req) {
             params.set('page', req.page);
             params.set('per_page', req.size);
-            params.set('tag', 'tag');
+            params.set('tag', 'test');
             params.set('event_name', 'drive-and-putt');
             if (req.sort) {
                  params.paramsMap.set('sort', req.sort);
@@ -41,7 +37,4 @@ export class TeamService {
         return this.http.get(this.resourceUrl, options);
     }
 
-    // delete(login: string): Observable<Response> {
-    //     return this.http.delete(`${this.resourceUrl}/${login}`);
-    // }
 }

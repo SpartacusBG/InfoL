@@ -67,11 +67,9 @@ export class TeamComponent implements OnInit {
   }
 
   private onSuccess(data: any, headers: any) {
-      // this.links = this.parseLinks.parse(headers.get('link'));
       this.totalItems = headers.get('X-Total-Count');
       this.queryCount = this.totalItems;
       this.teams = data;
-      console.log(this.teams);
   }
 
   private onError(error: any) {

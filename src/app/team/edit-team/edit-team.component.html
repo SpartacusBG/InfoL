@@ -5,22 +5,22 @@
   </div>
   <form action="">
     <div class="form-small-container">
-      <div class="holder">Team 35<span class="red">*</span></div>
-      <input type="text">
+      <!--<div class="holder">Team 35<span class="red">*</span></div>-->
+      <input [(ngModel)]='currentTeam.name' name="name" type="text">
     </div>
     <label for="name">Spieler</label>
     <div class="form-small-container">
-      <div class="holder">Frodo<span class="red">*</span></div>
-      <input type="text" id="name">
-      <div class="holder">frodo.beutin@sadas.com<span class="red">*</span></div>
-      <input type="text">
+      <!--<div class="holder">Frodo<span class="red">*</span></div>-->
+      <input  [(ngModel)]='currentTeam.players[0].first_name' type="text" id="name" name="first_name">
+      <!--<div class="holder">frodo.beutin@sadas.com<span class="red">*</span></div>-->
+      <input [(ngModel)]='currentTeam.players[0].email_telephone' type="text" name="mail">
     </div>
 
     <div class="form-small-container">
-      <div class="holder">Beutin<span class="red">*</span></div>
-      <input type="text">
-      <div class="holder">22.10.2699<span class="red">*</span></div>
-      <input type="text">
+      <!--<div class="holder">Beutin<span class="red">*</span></div>-->
+      <input [(ngModel)]='currentTeam.players[0].last_name' type="text" name="last_name">
+      <!--<div class="holder">22.10.2699<span class="red">*</span></div>-->
+      <input [(ngModel)]="currentTeam.players[0].birthdate" type="date" name="date">
     </div>
     
     <div class="time"></div>

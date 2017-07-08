@@ -6,9 +6,10 @@ import { extract } from '../../core/i18n.service';
 import { EditTeamComponent } from './edit-team.component';
 
 const routes: Routes = Route.withShell([
-  { path: '', redirectTo: '/teams', pathMatch: 'full' },
-  { path: 'edit-team', component: EditTeamComponent, data: { title: extract('Teams') } }
+  // { path: '', redirectTo: '/teams', pathMatch: 'full' },
+  { path: 'edit-team/:teamId', component: EditTeamComponent, data: { title: extract('Teams') } }
 ]);
+
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

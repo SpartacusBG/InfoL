@@ -3,6 +3,7 @@ import 'rxjs/add/operator/finally';
 import { Component, OnInit } from '@angular/core';
 import { TeamEvent, Player, HoleScore, PuttScore, Team } from './../shared/team/team.model';
 import { TeamService } from './../shared/team/team.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,8 @@ export class HomeComponent implements OnInit {
   teamObject = new TeamEvent;
 
   constructor(
-    private teamService: TeamService
+    private teamService: TeamService,
+    private router: Router,
     ) {}
 
   ngOnInit() {
@@ -32,6 +34,7 @@ export class HomeComponent implements OnInit {
 
   private onSaveSuccess() {
       this.isSaving = false;
+      this.router.navigate(['/teams']);
   }
 
   private onSaveError() {
