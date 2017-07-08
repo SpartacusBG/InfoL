@@ -1,8 +1,8 @@
 import 'rxjs/add/operator/finally';
 
 import { Component, OnInit } from '@angular/core';
-
-import { QuoteService } from './quote.service';
+import { TeamEvent, Player, HoleScore, PuttScore, Team } from './../shared/team/team.model';
+import { TeamService } from './../shared/team/team.service';
 
 @Component({
   selector: 'app-home',
@@ -11,16 +11,31 @@ import { QuoteService } from './quote.service';
 })
 export class HomeComponent implements OnInit {
 
-  quote: string;
-  isLoading: boolean;
+  playerObject = new Player;
+  isSaving: boolean;
+  teamObject = new TeamEvent;
 
-  constructor(private quoteService: QuoteService) {}
+  constructor(
+    private teamService: TeamService
+    ) {}
 
   ngOnInit() {
-    this.isLoading = true;
-    this.quoteService.getRandomQuote({ category: 'dev' })
-      .finally(() => { this.isLoading = false; })
-      .subscribe((quote: string) => { this.quote = quote; });
+    this.teamObject.team = new Team;
+    this.teamObject.team.players = new Array<Player>();  
+    this.isSaving = false;
+  }
+
+  save() {
+    this.teamObject.team.players.push(this.playerObject);
+    this.teamService.create(this.teamObject).subscribe((response) => this.onSaveSuccess(), () => this.onSaveError());
+  }
+
+  private onSaveSuccess() {
+      this.isSaving = false;
+  }
+
+  private onSaveError() {
+      this.isSaving = false;
   }
 
 }

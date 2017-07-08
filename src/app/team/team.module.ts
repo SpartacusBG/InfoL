@@ -8,6 +8,10 @@ import { TeamComponent } from './team.component';
 import { EditTeamComponent } from './edit-team/edit-team.component';
 import { TeamRoutingModule } from './team-routing.module';
 import { EditTeamRoutingModule } from './edit-team/edit-team-routing.module';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,7 +19,10 @@ import { EditTeamRoutingModule } from './edit-team/edit-team-routing.module';
     CoreModule,
     SharedModule,
     TeamRoutingModule,
-    EditTeamRoutingModule
+    EditTeamRoutingModule,
+    NgxPaginationModule,
+    Ng2SearchPipeModule,
+    FormsModule
   ],
   declarations: [
     TeamComponent,

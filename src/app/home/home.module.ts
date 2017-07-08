@@ -7,20 +7,23 @@ import { SharedModule } from '../shared/shared.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { QuoteService } from './quote.service';
-
+import { TeamService } from './../shared/team/team.service'
+import { FormsModule } from '@angular/forms';
 @NgModule({
   imports: [
     CommonModule,
     TranslateModule,
     CoreModule,
     SharedModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    FormsModule
   ],
   declarations: [
     HomeComponent
   ],
   providers: [
-    QuoteService
+    QuoteService,
+    TeamService
   ]
 })
 export class HomeModule { }

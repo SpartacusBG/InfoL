@@ -84,7 +84,7 @@ header {
         color: red;
     }
 
-    input[type="text"] {
+    input[type=text], input[type=date]{
       display: block;
       width: 100%;
       border: 1px solid #ccc;
