@@ -15,6 +15,10 @@
         }
     }
 
+    a {
+        color: #000;
+    }
+
     .serch-results {
         padding: 20px 0;
         border-bottom: 1px solid #ccc;
@@ -23,6 +27,35 @@
             display: inline-block;
             margin-right: 20px;
             font-weight: bold;
+        }
+    }
+
+}
+
+// Pagination styling
+pagination-controls {
+    float: right;
+    margin-top: -34px;
+
+}
+
+.my-pagination /deep/   {
+    .ngx-pagination {
+        color: red;
+
+        .pagination-previous, .pagination-next {
+            color: red;
+        }
+
+        .pagination-previous:before {
+            content: '❮';
+        }
+
+        .pagination-next:after {
+            content: '❯';
+        }
+        .current {
+            background: #636c7a;
         }
     }
 }

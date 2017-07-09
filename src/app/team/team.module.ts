@@ -8,9 +8,12 @@ import { TeamComponent } from './team.component';
 import { EditTeamComponent } from './edit-team/edit-team.component';
 import { TeamRoutingModule } from './team-routing.module';
 import { EditTeamRoutingModule } from './edit-team/edit-team-routing.module';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule } from '@angular/forms';
+import { TimePipe } from '../pipes/time.pipe';
+import {MomentModule} from 'angular2-moment/moment.module';
+import { FlashMessagesModule } from 'angular2-flash-messages';
 
 @NgModule({
   imports: [
@@ -22,7 +25,9 @@ import { FormsModule } from '@angular/forms';
     EditTeamRoutingModule,
     NgxPaginationModule,
     Ng2SearchPipeModule,
-    FormsModule
+    FormsModule,
+    MomentModule,
+    FlashMessagesModule
   ],
   declarations: [
     TeamComponent,

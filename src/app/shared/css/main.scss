@@ -10,6 +10,11 @@ input[type=date]:focus::-webkit-datetime-edit {
 color: black !important;
 }
 
+.alert-error {
+  background-color: red;
+  color: #fff;
+}
+
 .main-container {
   width: 1100px;
   margin: 0 auto;

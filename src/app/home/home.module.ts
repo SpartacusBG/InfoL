@@ -9,6 +9,8 @@ import { HomeComponent } from './home.component';
 import { QuoteService } from './quote.service';
 import { TeamService } from './../shared/team/team.service'
 import { FormsModule } from '@angular/forms';
+import { FlashMessagesModule } from 'angular2-flash-messages';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -16,7 +18,8 @@ import { FormsModule } from '@angular/forms';
     CoreModule,
     SharedModule,
     HomeRoutingModule,
-    FormsModule
+    FormsModule,
+    FlashMessagesModule
   ],
   declarations: [
     HomeComponent

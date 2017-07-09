@@ -11,7 +11,7 @@ export class TeamService {
     constructor(private http: Http) { }
 
     create(user: TeamEvent): Observable<Response> {
-        return this.http.post( 'http://pf.rails-stage.infoleven.eu:8084/teams', user);
+        return this.http.post( 'http://pf.rails-stage.infoleven.eu:8084/teams', user).map((res: Response) => res.json());;
     }
 
     find(teamId: any): Observable<TeamEvent> {
@@ -35,6 +35,10 @@ export class TeamService {
         };
 
         return this.http.get(this.resourceUrl, options);
+    }
+
+    update(teamEvent: TeamEvent): Observable<Response> {
+        return this.http.put(this.resourceUrl, teamEvent);
     }
 
 }
