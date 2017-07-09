@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit {
       allInputsArray.forEach((inputItem) => {
         errorMessageArray.forEach((messageItem) => {
           if (inputItem.name == messageItem.error) {
-            this.flashMessagesService.show(messageItem.message, { cssClass: 'alert-error', timeout: 3000 });
+            this.flashMessagesService.show(messageItem.message, { cssClass: 'alert-error', timeout: 4000 });
             
             inputItem.style.border = "2px solid red";
           }
