@@ -1,85 +1,84 @@
-  .home-header {
-    h2 {
-      font-size: 40px;
-      font-weight: bold;
-    }
+  // .home-header {
+  //   h2 {
+  //     font-size: 40px;
+  //     font-weight: bold;
+  //   }
 
-    p {
-      width: 700px;
-      line-height: 17px;
-      font-size: 16px;
-    }
-  }
+  //   p {
+  //     width: 700px;
+  //     line-height: 17px;
+  //     font-size: 16px;
+  //   }
+  // }
 
-  form {
-    padding-top: 40px;
-    padding-left: 20px;
-
-    .form-small-container {
-      position: relative;
-      display: inline-block;
-      width: 480px;
-      height: 36px;
-      margin: 0 5px 0 0;
-
-      .holder {
-        position: absolute;
-        margin: 23px 17px;
-        color: #000;
-        cursor: auto;
-        font-family: Helvetica;
-        z-index: 1;
-
-        &:last-of-type {
-          margin: 12px 17px;
-        }
-
-        &:first-of-type {
-          margin: 23px 17px;
-        }
-      }
-    }
-
-    .red {
-        color: red;
-    }
-
-    input[type="text"] {
-      display: block;
-      width: 100%;
-      border: 1px solid #ccc;
-      padding: 10px;
-      border-radius: 5px;
-      margin: 10px 0;
-    }
-
-    label {
-      display: block;
-      padding-left: 17px;
-      margin-top: 32px;
-    }
+  // form {
+  //   padding-top: 40px;
     
-    .accept-container {
-      margin-top: 40px;
 
-      p {
-        display: block;
-        float: left;
-        margin: -4px 0 0 10px;
-        width: 365px;
-      }
+  //   .form-small-container {
+  //     position: relative;
+  //     display: inline-block;
+  //     width: 480px;
+  //     height: 36px;
+  //     margin: 0 5px 0 0;
 
-      input[type="checkbox"] {
-        display: block;
-        float: left;
-        width: 20px;
-        height: 20px;
-        margin-left: 18px;
-      }
-    }
+  //     .holder {
+  //       position: absolute;
+  //       margin: 23px 17px;
+  //       color: #000;
+  //       cursor: auto;
+  //       font-family: Helvetica;
+  //       z-index: 1;
 
-    p {
-      margin: 20px 0 0 10px;
-    }
+  //       &:last-of-type {
+  //         margin: 12px 17px;
+  //       }
 
-  }
+  //       &:first-of-type {
+  //         margin: 23px 17px;
+  //       }
+  //     }
+  //   }
+
+  //   .red {
+  //       color: red;
+  //   }
+
+  //   input[type="text"] {
+  //     display: block;
+  //     width: 100%;
+  //     border: 1px solid #ccc;
+  //     padding: 10px;
+  //     border-radius: 5px;
+  //     margin: 10px 0;
+  //   }
+
+  //   label {
+  //     display: block;
+  //     padding-left: 17px;
+  //     margin-top: 32px;
+  //   }
+    
+  //   .accept-container {
+  //     margin-top: 40px;
+
+  //     p {
+  //       display: block;
+  //       float: left;
+  //       margin: -4px 0 0 10px;
+  //       width: 365px;
+  //     }
+
+  //     input[type="checkbox"] {
+  //       display: block;
+  //       float: left;
+  //       width: 20px;
+  //       height: 20px;
+  //     }
+  //   }
+
+  //   p {
+  //     margin: 20px 0 0 10px;
+  //   }
+
+  // }

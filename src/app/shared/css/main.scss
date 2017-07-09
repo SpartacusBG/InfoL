@@ -3,6 +3,13 @@ html, body {
     padding: 0;
 }
 
+input[type=date]:required:invalid::-webkit-datetime-edit {
+color: transparent;
+}
+input[type=date]:focus::-webkit-datetime-edit {
+color: black !important;
+}
+
 .main-container {
   width: 1100px;
   margin: 0 auto;
@@ -19,6 +26,13 @@ button {
       text-align: center;
       background-color: transparent;
       margin-top: 40px;
+
+      &:disabled,
+      &[disabled]{
+        border: 1px solid #999999;
+        background-color: #ccc;
+        color: #666;
+    }
 }
 
 .clearfix:after {
@@ -53,7 +67,7 @@ header {
 
   form {
     padding-top: 40px;
-    padding-left: 20px;
+    padding-left: 0;
 
     .form-small-container {
       position: relative;
@@ -71,11 +85,11 @@ header {
         z-index: 1;
 
         &:last-of-type {
-          margin: 12px 17px;
+          margin: -38px 17px;
         }
 
         &:first-of-type {
-          margin: 23px 17px;
+          margin: -36px 17px;
         }
       }
     }
@@ -93,6 +107,10 @@ header {
       margin: 10px 0;
     }
 
+    input:valid + .holder {
+        display: none;
+    }
+
     label {
       display: block;
       padding-left: 17px;
@@ -105,8 +123,14 @@ header {
       p {
         display: block;
         float: left;
-        margin: -4px 0 0 10px;
         width: 365px;
+
+        &.agree {
+          width: 540px;
+          display: inline-block;
+          float: none;
+          margin: -6px 0 0 36px;
+        }
       }
 
       input[type="checkbox"] {
@@ -114,12 +138,19 @@ header {
         float: left;
         width: 20px;
         height: 20px;
-        margin-left: 18px;
+        margin-right: 10px;
+
+        &:checked {
+          background-color: red;
+          color: red;
+        }
       }
     }
 
+    
+
     p {
-      margin: 20px 0 0 10px;
+      margin: 71px 0 0 0px;
     }
 
 }

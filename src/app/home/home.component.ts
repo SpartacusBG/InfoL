@@ -32,8 +32,18 @@ export class HomeComponent implements OnInit {
     this.teamService.create(this.teamObject).subscribe((response) => this.onSaveSuccess(), () => this.onSaveError());
   }
 
+  removeDatePlaceHolderOnFocus(event) {
+    event.target.nextElementSibling.style.display = 'none';
+  }
+
+  addDatePlaceHolderOnFocus(event) {
+    if (!document.querySelector(".datePicker:valid")) {
+      event.target.nextElementSibling.style.display = 'block';
+    }
+  }
+
   private onSaveSuccess() {
-      this.isSaving = false;
+      this.isSaving = true;
       this.router.navigate(['/teams']);
   }
 

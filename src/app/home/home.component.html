@@ -2,30 +2,40 @@
     <h2>Jetzt Registrieren</h2>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
   </div>
-  <form action="" name='editForm' role="form"  novalidate > 
+  <form name='editForm' role="form" (ngSubmit)="save()" novalidate #editForm="ngForm"> 
     <!--(ngSubmit)="save()"-->
     <div class="form-small-container">
-      <!--<div class="holder">Nickname fuer das Liederboard<span class="red">*</span></div>-->
-      <input [(ngModel)]="teamObject.team.name" name="nick_name" type="text">
+      <input required [(ngModel)]="teamObject.team.name" name="nick_name" type="text">
+      <div class="holder">Nickname fuer das Liederboard<span class="red">*</span></div>
     </div>
     <label for="name">Spieler</label>
     <div class="form-small-container">
-      <!--<div class="holder">Vorname<span class="red">*</span></div>-->
-      <input [(ngModel)]="playerObject.first_name" name="first_name" type="text" id="name">
-      <!--<div class="holder">Email oder Handynummer<span class="red">*</span></div>-->
-      <input [(ngModel)]="playerObject.email_telephone" name="email_telephone" type="text">
+      <input required [(ngModel)]="playerObject.first_name" name="first_name" type="text" id="name">
+      <div class="holder">Vorname<span class="red">*</span></div>
+      <input required [(ngModel)]="playerObject.email_telephone" name="email_telephone" type="text">
+      <div class="holder">Email oder Handynummer<span class="red">*</span></div>
     </div>
 
     <div class="form-small-container">
-      <!--<div class="holder">Nachname<span class="red">*</span></div>-->
-      <input [(ngModel)]="playerObject.last_name" name="last_name" type="text">
-      <!--<div class="holder">Geburtsdatum<span class="red">*</span></div>-->
-      <input [(ngModel)]="playerObject.birthdate" name="birthdate" type="date">
+      <input required [(ngModel)]="playerObject.last_name" name="last_name" type="text">
+      <div class="holder">Nachname<span class="red">*</span></div>
+      <input required [(ngModel)]="playerObject.birthdate" (focus)="removeDatePlaceHolderOnFocus($event)" class="datePicker" (focusout)="addDatePlaceHolderOnFocus($event)" name="birthdate" type="date">
+      <div class="holder">Geburtsdatum<span class="red">*</span></div>
     </div>
     <div class="clearfix accept-container">
-      <input type="checkbox" id="agree">
-      <p for="agree">Hiermit akzeptiere ich die <u><a href="#">Teilnahmbedingung</a></u> und bestatetige, dass ich der Autor des Inhalts bin</p>
+      <!--<label for="" class="control control--checkbox">
+        <input type="checkbox" id="agree">
+        <div class="control__indicator"></div>
+      </label>-->
+      <label class="control control--checkbox">
+        <input required type="checkbox" id="agree"/>
+        <div class="control__indicator">
+          <p class="agree" for="agree">Hiermit akzeptiere ich die <u><a href="#">Teilnahmbedingung</a></u> und bestatetige, dass ich der Autor des Inhalts bin</p>
+        </div>
+      </label>
+      
     </div>
     <p><span class="red">*</span>Pflichtfelder</p>
+    <button type="submit" disabled [disabled]="editForm.form.invalid || isSaving" >Speichern</button>
   </form>
-    <button (click)='save()' >Speichern</button>
+
