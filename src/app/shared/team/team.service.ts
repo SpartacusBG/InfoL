@@ -38,7 +38,7 @@ export class TeamService {
     }
 
     update(teamEvent: TeamEvent): Observable<Response> {
-        return this.http.put(this.resourceUrl, teamEvent);
+        return this.http.put(this.resourceUrl, teamEvent).map((res: Response) => res.json());
     }
 
 }

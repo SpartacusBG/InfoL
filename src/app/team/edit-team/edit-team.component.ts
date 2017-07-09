@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { TeamService } from './../../shared/team/team.service';
 import { TeamEvent, Player, HoleScore, PuttScore, Team } from './../../shared/team/team.model';
-import { TimePipe } from '../../pipes/time.pipe';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import * as moment from 'moment';
  
@@ -12,7 +11,6 @@ import * as moment from 'moment';
 @Component({
   selector: 'edit-team-component',
   templateUrl: './edit-team.component.html',
-  providers: [TimePipe],
   styleUrls: ['./edit-team.component.scss'],
 })
 export class EditTeamComponent implements OnInit {
@@ -20,12 +18,12 @@ export class EditTeamComponent implements OnInit {
   routeSub: any;
   currentTeam = new Team;
   currentPlayer = new Player;
-  time = this.getMilliseconds(new Date());
-  // time = moment(new Date().toDateString()).format('mm:ss:sss');
-  formattedTime = moment(this.time).format('mm:ss:sss');
   puttScore = new PuttScore;
   event = new TeamEvent;
-  puttNumber: number;;
+  puttNumber: number;
+  minutes = "00";
+  seconds = "00";
+  milliSeconds = "00";
 
   constructor(
     private route: ActivatedRoute,
@@ -38,28 +36,9 @@ export class EditTeamComponent implements OnInit {
       this.findTeam(params.teamId);
     });
 
-    
-  }
-
-  msToTime(duration) {
-    var milliseconds = parseInt(((duration%1000)/100).toString())
-        , seconds = parseInt(((duration/1000)%60).toString())
-        , minutes = parseInt(((duration/(1000*60))%60).toString())
-        , hours = parseInt(((duration/(1000*60*60))%24).toString());
-
-    hours = (hours < 10) ? Number("0") + hours : hours;
-    minutes = (minutes < 10) ? Number("0") + minutes : minutes;
-    seconds = (seconds < 10) ? Number("0") + seconds : seconds;
-
-    console.log( hours + ":" + minutes + ":" + seconds + ":" + milliseconds);
-}
-
-  getMilliseconds(date) {
-    var m = moment(date);
-
-    var ms = m.milliseconds() + 1000 * (m.seconds() + 60 * (m.minutes() + 60 * m.hours()));
-
-    return ms
+    const elm = document.body.querySelector("input[type=number]");
+    elm.addEventListener('keyup', this.createValidator(elm));
+     
   }
 
   model = 3;
@@ -73,17 +52,43 @@ export class EditTeamComponent implements OnInit {
     return formattedDate;
   }
 
-  splitTime() {
-    var arr = this.formattedTime.split(":");
-    var newTime = '';
-    for (var i = 0; i < arr.length; i++) {
-      newTime += arr[i];
+  checkMinuntesLength(el) {
+    this.minutes = this.checkInputLength(el, this.minutes);
+  }
+
+  checkSecondsLength(el) {
+    this.seconds = this.checkInputLength(el, this.seconds);
+  }
+
+  checkMilliSecondsLength(el) {
+    this.milliSeconds = this.checkInputLength(el, this.milliSeconds);
+  }
+
+  checkInputLength(el, item) {
+    if (el.target.value.length < 2 && el.target.value.length >= 1) {
+      item = "0" + item;
+    }else if (el.target.value.length < 1) {
+      item = "00" + item;
     }
-    return newTime;
+    return item;
+  }
+
+  createValidator(element) {
+    return () => {
+        let min = parseInt(element.getAttribute("min")) || 0;
+        let max = parseInt(element.getAttribute("max")) || 0;
+
+        let value = parseInt(element.value) || min;
+        element.value = value; // make sure we got an int
+
+        if (value < min) element.value = min;
+        if (value > max) element.value = max;
+    }
   }
 
   save() {
-    this.puttScore.time = Number(this.splitTime());
+    const dateAsMilliseconds = this.minutes + this.seconds + this.milliSeconds;
+    this.puttScore.time = Number(dateAsMilliseconds);
     this.currentTeam.drive_and_putt_score = this.puttScore;
     this.currentTeam.players[0] = this.currentPlayer;
     this.event.team = this.currentTeam;
@@ -105,13 +110,17 @@ export class EditTeamComponent implements OnInit {
         this.currentTeam = data;
         this.currentPlayer = this.currentTeam.players[0];
         this.currentPlayer.birthdate = this.formatDate(this.currentPlayer.birthdate).toString();
-        this.puttNumber = this.currentTeam.drive_and_putt_score.putts;
-        // this.time = moment(new Date(this.currentTeam.drive_and_putt_score.time).toDateString()).format('mm:ss:sss');
-        // this.time = this.getMilliseconds(new Date(this.currentTeam.drive_and_putt_score.time));
-        this.formattedTime = moment(new Date(this.currentTeam.drive_and_putt_score.time)).format('mm:ss:sss');
-      //  console.log(moment(new Date(this.currentTeam.drive_and_putt_score.time)).format('mm:ss:sss'));
-        console.log(this.currentTeam.drive_and_putt_score.time);
-        this.msToTime(this.currentTeam.drive_and_putt_score.time)
+        this.puttScore.putts = this.currentTeam.drive_and_putt_score.putts;
+
+        let timeArray = this.currentTeam.drive_and_putt_score.time.toString().split('');
+        for (let i = 0; i < timeArray.length; i++) {
+          if (timeArray[i] == undefined) {
+              timeArray[i] = '0';
+          }
+        }
+        this.minutes = timeArray[0] + timeArray[1];
+        this.seconds = timeArray[2] + timeArray[3];
+        this.milliSeconds = timeArray[4] + timeArray[5];
     });
   }
 
