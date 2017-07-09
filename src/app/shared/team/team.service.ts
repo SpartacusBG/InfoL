@@ -1,17 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-
+import 'rxjs/add/operator/map';
 import { TeamEvent } from './team.model';
 
 @Injectable()
 export class TeamService {
     private resourceUrl = 'http://pf.rails-stage.infoleven.eu:8084/teams';
+    public errorMessage;
 
     constructor(private http: Http) { }
 
     create(user: TeamEvent): Observable<Response> {
-        return this.http.post( 'http://pf.rails-stage.infoleven.eu:8084/teams', user).map((res: Response) => res.json());;
+        return this.http.post( 'http://pf.rails-stage.infoleven.eu:8084/teams', user).catch((err:Response) =>{
+            this.errorMessage = err.json();
+            return Observable.throw(new Error(this.errorMessage));
+         });;
     }
 
     find(teamId: any): Observable<TeamEvent> {
@@ -38,7 +42,8 @@ export class TeamService {
     }
 
     update(teamEvent: TeamEvent): Observable<Response> {
-        return this.http.put(this.resourceUrl, teamEvent).map((res: Response) => res.json());
+        return this.http.put(this.resourceUrl, teamEvent).map(response => response.json());
+            
     }
 
 }

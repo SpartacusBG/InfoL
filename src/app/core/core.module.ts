@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { ShellComponent } from './shell/shell.component';
 import { HeaderComponent } from './shell/header/header.component';
+import { FooterComponent } from './shell/footer/footer.component'
 import { I18nService } from './i18n.service';
 import { HttpService } from './http/http.service';
 import { HttpCacheService } from './http/http-cache.service';
@@ -26,11 +27,13 @@ export function createHttpService(backend: ConnectionBackend,
     NgbModule.forRoot()
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   declarations: [
     ShellComponent,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   providers: [
     I18nService,

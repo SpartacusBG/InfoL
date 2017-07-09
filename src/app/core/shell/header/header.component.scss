@@ -3,6 +3,13 @@
 .navbar {
   margin-bottom: $spacer;
 }
+.nav-logo {
+  color: #fff;
+  font-size: 30px;
+  font-weight: bold;
+  width: 200px;
+  margin: 0 auto;
+}
 
 .nav-link.dropdown-toggle {
   cursor: pointer;
