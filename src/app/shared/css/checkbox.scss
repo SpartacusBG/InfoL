@@ -35,7 +35,7 @@
 
 /* Checked state */
 .control input:checked ~ .control__indicator {
-	background: #2aa1c0;
+	background: red;
 }
 
 /* Hover state whilst checked */
