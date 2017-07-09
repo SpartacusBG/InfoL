@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { TimePipe } from '../pipes/time.pipe';
 import {MomentModule} from 'angular2-moment/moment.module';
 import { FlashMessagesModule } from 'angular2-flash-messages';
+import { SpinnerModule } from 'angular2-spinner/dist';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
     Ng2SearchPipeModule,
     FormsModule,
     MomentModule,
-    FlashMessagesModule
+    FlashMessagesModule,
+    SpinnerModule
   ],
   declarations: [
     TeamComponent,

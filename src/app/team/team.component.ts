@@ -13,22 +13,15 @@ import { ITEMS_PER_PAGE } from './../shared/constraints/pagination.constants';
 })
 export class TeamComponent implements OnInit {
 
-  currentAccount: any;
-  error: any;
-  success: any;
-  routeData: any;
-  links: any;
   totalItems: any;
   queryCount: any;
   itemsPerPage: any;
   page: any;
   predicate: any;
-  previousPage: any;
   reverse: any;
   p: number = 1;
-
   teams = new TeamEvent;
-
+  spinner: boolean = true;
 
   constructor(
     private teamService: TeamService,
@@ -36,12 +29,6 @@ export class TeamComponent implements OnInit {
     private router: Router
   ) {
     this.itemsPerPage = ITEMS_PER_PAGE;
-    // this.routeData = this.activatedRoute.data.subscribe((data) => {
-    //     this.page = data['pagingParams'].page;
-    //     this.previousPage = data['pagingParams'].page;
-    //     this.reverse = data['pagingParams'].ascending;
-    //     this.predicate = data['pagingParams'].predicate;
-    // });
   }
 
   ngOnInit() {
@@ -70,19 +57,12 @@ export class TeamComponent implements OnInit {
       this.totalItems = headers.get('X-Total-Count');
       this.queryCount = this.totalItems;
       this.teams = data;
+      this.spinner = false;
   }
 
   private onError(error: any) {
       // this.alertService.error(error.error, error.message, null);
   }
-
-  loadPage(page: number) {
-        if (page !== this.previousPage) {
-            this.previousPage = page;
-            this.transition();
-        }
-    }
-
     transition() {
         this.router.navigate(['/user-management'], { queryParams:
                 {
@@ -92,5 +72,4 @@ export class TeamComponent implements OnInit {
         });
         this.loadAll();
     }
-
 }

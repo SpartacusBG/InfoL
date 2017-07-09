@@ -23,6 +23,10 @@
         }
     }
 
+    .no-outline:focus {
+        outline: none;
+    }
+
     .input-container {
         border-bottom: 1px solid #000;
         width: 67px;
