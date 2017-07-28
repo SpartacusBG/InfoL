@@ -48,6 +48,7 @@ export class TeamComponent implements OnInit {
     if (this.currentSearch) {
         this.teamService.search({
         query: this.currentSearch,
+        page: event,
       }).subscribe(
         (res: Response) => this.onSuccess(res.json()),
         (res: Response) => this.onError(res.json())
