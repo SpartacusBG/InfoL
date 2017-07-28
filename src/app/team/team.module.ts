@@ -12,7 +12,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule } from '@angular/forms';
 import { TimePipe } from '../pipes/time.pipe';
-import {MomentModule} from 'angular2-moment/moment.module';
+import { MomentModule } from 'angular2-moment/moment.module';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { SpinnerModule } from 'angular2-spinner/dist';
 

@@ -16,12 +16,12 @@ export class TeamComponent implements OnInit {
   totalItems: any;
   queryCount: any;
   itemsPerPage: any;
-  page: any;
   predicate: any;
   reverse: any;
-  p: number = 1;
+  p: number = 0;
   teams = new TeamEvent;
   spinner: boolean = true;
+  previousPage: any;
 
   constructor(
     private teamService: TeamService,
@@ -32,44 +32,31 @@ export class TeamComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadAll();
+    this.loadAll(0);
   }
 
-  loadAll() {
+  loadAll(event) {
         this.teamService.query({
-            page: this.page - 1,
-            size: this.itemsPerPage,
-            sort: this.sort()}).subscribe(
-            (res: Response) => this.onSuccess(res.json(), res.headers),
+            page: event,
+            size: this.itemsPerPage}).subscribe(
+            (res: Response) => this.onSuccess(res.json()),
             (res: Response) => this.onError(res.json())
         );
     }
 
-  sort() {
-      const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
-      if (this.predicate !== 'id') {
-          result.push('id');
-      }
-      return result;
-  }
-
-  private onSuccess(data: any, headers: any) {
-      this.totalItems = headers.get('X-Total-Count');
-      this.queryCount = this.totalItems;
-      this.teams = data;
+  private onSuccess(response) {
+      this.totalItems = response.total;
+      this.teams = response;
       this.spinner = false;
   }
 
   private onError(error: any) {
-      // this.alertService.error(error.error, error.message, null);
+      alert(error.error);
   }
-    transition() {
-        this.router.navigate(['/user-management'], { queryParams:
-                {
-                    page: this.page,
-                    sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-                }
-        });
-        this.loadAll();
-    }
+
+
+  getServerData(event) {
+      this.loadAll(event);   
+  }
+
 }

@@ -29,9 +29,6 @@ export class TeamService {
             params.set('per_page', req.size);
             params.set('tag', 'test');
             params.set('event_name', 'drive-and-putt');
-            if (req.sort) {
-                 params.paramsMap.set('sort', req.sort);
-            }
         }
 
         const options = {
