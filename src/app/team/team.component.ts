@@ -14,14 +14,10 @@ import { ITEMS_PER_PAGE } from './../shared/constraints/pagination.constants';
 export class TeamComponent implements OnInit {
 
   totalItems: any;
-  queryCount: any;
   itemsPerPage: any;
-  predicate: any;
-  reverse: any;
   p: number = 0;
   teams = new TeamEvent;
   spinner: boolean = true;
-  previousPage: any;
 
   constructor(
     private teamService: TeamService,
@@ -32,7 +28,7 @@ export class TeamComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadAll(0);
+    this.loadAll(1);
   }
 
   loadAll(event) {
@@ -53,7 +49,6 @@ export class TeamComponent implements OnInit {
   private onError(error: any) {
       alert(error.error);
   }
-
 
   getServerData(event) {
       this.loadAll(event);   
