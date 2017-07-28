@@ -22,17 +22,30 @@ export class TeamService {
         return this.http.get(`${this.resourceUrl}/${teamId}`).map((res: Response) => res.json());
     }
 
-    query(req?: any): any {
+    setParams(req) {
         const params: URLSearchParams = new URLSearchParams();
         if (req) {
             params.set('page', req.page);
             params.set('per_page', req.size);
             params.set('tag', 'test');
             params.set('event_name', 'drive-and-putt');
+            if (req.query) {
+                params.set('name', req.query);
+            }
         }
+        return params;
+    }
 
+    search(req?: any): any {
         const options = {
-            search: params
+            search: this.setParams(req)
+        };
+        return this.http.get('http://pf.rails-stage.infoleven.eu:8084/teams/search', options);
+    }
+
+    query(req?: any): any {
+        const options = {
+            search: this.setParams(req)
         };
 
         return this.http.get(this.resourceUrl, options);

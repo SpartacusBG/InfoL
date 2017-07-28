@@ -1,10 +1,10 @@
 <div class="teams-container">
     <div class="search">
         <span>Suche:</span>
-        <input type="text" [(ngModel)]="term">
+        <input type="text" [(ngModel)]="currentSearch" (keyup)="search(currentSearch)">
     </div>
     <spinner [size]="120" *ngIf="spinner" [tickness]="3" [color]="'#faa933'"></spinner>
-    <div  *ngFor="let team of teams.teams | paginate: { itemsPerPage: itemsPerPage, currentPage: p, totalItems: totalItems } | filter:term" class="serch-results">
+    <div  *ngFor="let team of teams.teams | paginate: { itemsPerPage: itemsPerPage, currentPage: p, totalItems: totalItems }" class="serch-results">
         <div class="search-result">
             <h3>{{ team.name }}</h3>
             <span>

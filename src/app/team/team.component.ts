@@ -1,5 +1,4 @@
 import 'rxjs/add/operator/finally';
-
 import { Component, OnInit } from '@angular/core';
 import { TeamEvent, Player, HoleScore, PuttScore, Team } from './../shared/team/team.model';
 import { TeamService } from './../shared/team/team.service';
@@ -18,6 +17,7 @@ export class TeamComponent implements OnInit {
   p: number = 0;
   teams = new TeamEvent;
   spinner: boolean = true;
+  currentSearch: string;
 
   constructor(
     private teamService: TeamService,
@@ -31,27 +31,51 @@ export class TeamComponent implements OnInit {
     this.loadAll(1);
   }
 
-  loadAll(event) {
-        this.teamService.query({
-            page: event,
-            size: this.itemsPerPage}).subscribe(
-            (res: Response) => this.onSuccess(res.json()),
-            (res: Response) => this.onError(res.json())
+  search(query) {
+    if (!query) {
+      return this.clear();
+    }
+    this.currentSearch = query;
+    this.loadAll();
+  }
+
+  clear() {
+    this.currentSearch = '';
+    this.loadAll();
+  }
+
+  loadAll(event?) {
+    if (this.currentSearch) {
+      this.teamService.search({
+        query: this.currentSearch,
+      }).subscribe(
+        (res: Response) => this.onSuccess(res.json()),
+        (res: Response) => this.onError(res.json())
         );
+      return;
     }
 
+    this.teamService.query({
+      page: event,
+      size: this.itemsPerPage
+    }).subscribe(
+      (res: Response) => this.onSuccess(res.json()),
+      (res: Response) => this.onError(res.json())
+      );
+  }
+
   private onSuccess(response) {
-      this.totalItems = response.total;
-      this.teams = response;
-      this.spinner = false;
+    this.totalItems = response.total;
+    this.teams = response;
+    this.spinner = false;
   }
 
   private onError(error: any) {
-      alert(error.error);
+    alert(error.error);
   }
 
   getServerData(event) {
-      this.loadAll(event);   
+    this.loadAll(event);
   }
 
 }
